@@ -1,14 +1,79 @@
 
-import { View, Image, Text, TouchableOpacity,StyleSheet, TextInput, ScrollView, Platform } from 'react-native';
+import { View, Image, Text, TouchableOpacity,StyleSheet, TextInput, ScrollView, Platform, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Checkbox } from 'react-native-paper';
 import React from 'react';
+import Button from '../../components/button';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 export default function HomeScreen() {
+
+
+  const [employeedata, setEmployeeData] = useState([]);
+
+  console.log('employee data', employeedata);
+
+  const getemloyeewithaxios= async()=>{
+    try {
+      const response= await axios.get('https://jsonplaceholder.typicode.com/todos/1')
+     // console.log('response', response.data.data, response.status);
+
+      setEmployeeData(response.data.data);
+
+
+
+   //   if(response.status===200){
+      //  Alert.alert('Success !! ," you are connected"');
+     // }
+     // else{
+        //Alert.alert('error');
+    //  }
+    }
+    catch(error){
+     Alert.alert('error');
+    }
+  }
+
+const getemployeeinfo= async()=>{
+
+  try {
+    const response= await fetch('https://jsonplaceholder.typicode.com/todos/1')
+    const data= await response.json();
+    console.log('data', data);
+    
+  }
+  catch(e){
+    console.log('error', e);
+
+  }
+}
+
+useEffect(() => {
+  getemloyeewithaxios();
+ 
+},[]); 
+
+
+console.log('im a boy')
+
   const [checked, setChecked] = React.useState(false);
-  
+  const[FullName, setFullName] = useState('');
+  const[PhoneNumber, setPhoneNumber] = useState('');
+  const[Password, setPassword] = useState('');
+  const[ConfirmPassword, setConfirmPassword] = useState('');
+  const [isChecked, setIsChecked] = useState(false);
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+  console.log('UserInformation', FullName, PhoneNumber, Password, ConfirmPassword);
+ 
+
+
+
+
   return (
-    <SafeAreaView style={{marginHorizontal:30, flex:1}}>  
+    <SafeAreaView style={{marginHorizontal:20, flex:1}}>  
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <Image resizeMode='contain' source ={require('../../assets/images/logo.png')}style={{ width: 104, height: 39, alignSelf:'center', 
@@ -55,19 +120,29 @@ export default function HomeScreen() {
 
     <View>
       <Text  style={styles.texts}> Full Name</Text>
-      <TextInput style={styles.input}/>
+      <TextInput style={styles.input} onChangeText={(name)=>{
+        setFullName(name);
+      }}/>
+
+        
     </View>
     <View>
       <Text  style={styles.texts}> Phone Number</Text>
-      <TextInput style={styles.input}/>
+      <TextInput style={styles.input} onChangeText={(number)=>{
+        setPhoneNumber(number);
+      }}/>
     </View>
     <View>
       <Text style={styles.texts}> Password</Text>
-      <TextInput style={styles.input}/>
+      <TextInput style={styles.input} onChangeText={(password)=>{
+        setPassword(password);
+      }}/>
     </View>
     <View>
       <Text  style={styles.texts}> Confirm Password</Text>
-      <TextInput style={styles.input}/>
+      <TextInput style={styles.input} onChangeText={(confirmpass)=>{
+        setConfirmPassword(confirmpass);
+      }}/>
     </View>
 
     <View style={{flexDirection:'row', marginBottom:10, }}>
@@ -83,17 +158,14 @@ export default function HomeScreen() {
     </TouchableOpacity>
     <Text>
     By continuing,you acknowledge that
-     you read and understood,and agree to Pet Haven Terms of Service and Privacy Policy.
+     you have read and understood,and agree to Pet Haven <Text style={{fontWeight:'bold'}}>Terms of Service </Text> and <Text style={{fontWeight:'bold'}}>Privacy Policy</Text> .
     </Text>
                           
 
     </View>
+    <Button text={'Continue'}/>
 
-    <TouchableOpacity  style={{backgroundColor:'#7540EE', marginTop:10 ,width:'100%', height:60, borderRadius:8, justifyContent:'center', alignItems:'center'}}>
-      <Text style={{ fontSize:18, fontWeight:'bold',textAlign:'center',color:'white'}}>
-        Continue
-      </Text>
-    </TouchableOpacity>
+    
     </ScrollView> 
       
     </SafeAreaView>

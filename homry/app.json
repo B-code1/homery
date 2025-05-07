@@ -8,15 +8,31 @@
     "scheme": "homery",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "splash": {
+        "image": "./assets/images/splash.png",
+        "resizeMode": "cover",
+        "backgroundColor": "#ffffff"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/splash.png",
+
         "backgroundColor": "#ffffff"
-      }
-      
+      },
+      "splash": {
+        "image": "./assets/images/splash.png",
+        "resizeMode": "cover",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.anonymous.homery"
     },
     "web": {
       "bundler": "metro",
@@ -29,21 +45,13 @@
         "expo-splash-screen",
         {
           "image": "./assets/images/splash.png",
-          
-         
-          "resizeMode": "contain",
+          "resizeMode": "cover",
           "backgroundColor": "#ffffff"
         }
       ]
     ],
     "experiments": {
       "typedRoutes": true
-    },
-    "splash"
-    : {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain"
     }
-  
   }
 }
